@@ -1,31 +1,33 @@
-import { defineConfig } from 'astro/config';
-
+import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import svelte from "@astrojs/svelte";
 import mdx from "@astrojs/mdx";
-import prefetch from '@astrojs/prefetch';
+import prefetch from "@astrojs/prefetch";
 // import { sitemap } from '@astrojs/sitemap';
 
-import rehypeSlug from 'rehype-slug';
-import remarkGFM from 'remark-gfm';
-import remarkSmartypants from 'remark-smartypants';
-// import { sitemap } from './integrations/sitemap';
+import rehypeSlug from "rehype-slug";
+import remarkGFM from "remark-gfm";
+import remarkSmartypants from "remark-smartypants";
+import vercel from "@astrojs/vercel/serverless";
 
-
+// https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), svelte(), mdx(), prefetch()],
+  output: "server",
+  adapter: vercel(),
   markdown: {
-    syntaxHighlight: 'shiki',
+    syntaxHighlight: "shiki",
     shikiConfig: {
       theme: "github-dark",
     },
-    // shikiConfig: { theme },
     remarkPlugins: [
-      // These are here because setting custom plugins disables the default plugins
       remarkGFM,
-      [remarkSmartypants, { dashes: false }],
-      // Add our custom plugin that marks links to fallback language pages
-      // remarkFallbackLang(),
+      [
+        remarkSmartypants,
+        {
+          dashes: false,
+        },
+      ],
     ],
     rehypePlugins: [
       rehypeSlug,
@@ -37,5 +39,4 @@ export default defineConfig({
       // rehypei18nAutolinkHeadings(),
     ],
   },
-
 });
