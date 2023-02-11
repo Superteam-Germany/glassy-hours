@@ -8,12 +8,12 @@ import prefetch from "@astrojs/prefetch";
 import rehypeSlug from "rehype-slug";
 import remarkGFM from "remark-gfm";
 import remarkSmartypants from "remark-smartypants";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel/static";
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), svelte(), mdx(), prefetch()],
-  output: "server",
+  output: "static",
   adapter: vercel(),
   markdown: {
     syntaxHighlight: "shiki",
