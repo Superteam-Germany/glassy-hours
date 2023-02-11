@@ -1,0 +1,29 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import MainLayout from "../layouts/MainLayout.astro";
+import "../styles/index.pcss";
+import AuthorChip from "../components/AuthorChip.svelte";
+
+export async function getStaticPaths() {
+  const docs = await getCollection("docs");
+  return docs.map((entry) => ({
+    params: {
+      slug: entry.slug,
+    },
+    props: entry,
+  }));
+}
+
+type Props = CollectionEntry<"docs">;
+
+const post = Astro.props;
+const { Content, headings } = await post.render();
+---
+
+<MainLayout headings={headings} title={post.data.title}>
+  <h1>{post.data.title}</h1>
+  <AuthorChip client:idle post={post} />
+  <div class="mt-10 pb-24">
+    <Content />
+  </div>
+</MainLayout>

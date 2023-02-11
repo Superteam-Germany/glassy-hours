@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+
+const items = (await getCollection("docs")).map((doc) => ({
+  title: doc.data.title,
+  slug: `/${doc.slug}`,
+}));
+
+const currentRoute = Astro.url.pathname;
+---
+
+<div class="drawer">
+  {
+    items.map((item) => (
+      <a
+        href={item.slug}
+        rel="prefetch"
+        class={`drawer-item ${
+          currentRoute == item.slug && "drawer-item--selected"
+        }`}
+      >
+        {item.title}
+      </a>
+    ))
+  }
+</div>
+
+<style lang="postcss">
+  .drawer {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+    @apply w-60 h-fit py-1 fixed left-5 top-[85px] bottom-10 flex flex-col rounded-2xl border-2 border-primary/50 bg-background;
+  }
+
+  .drawer-item {
+    text-decoration: none !important;
+    @apply px-4 py-3 my-1.5 mx-2.5 flex flex-row items-center rounded-lg hover:scale-[1.03] hover:outline-primary outline outline-transparent transition-transform text-base text-white/90 font-medium font-heading active:scale-90 ease-out;
+  }
+  .drawer-item:hover {
+    color: #fff; /* Overwrite the global CSS */
+  }
+  .drawer-item--selected {
+    @apply bg-primary/70;
+  }
+</style>

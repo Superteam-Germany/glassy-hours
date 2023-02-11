@@ -1,0 +1,70 @@
+---
+import Appbar from "../components/Appbar.astro";
+import Drawer from "../components/Drawer.astro";
+import Headers from "../components/Headers.astro";
+
+import "../styles/index.pcss";
+
+export interface Props {
+  title: string;
+  headings: {
+    depth: number;
+    text: string;
+    slug: string;
+  }[];
+}
+
+const { title, headings } = Astro.props;
+
+const depth2Headings = headings.filter((heading) => heading.depth === 2);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!-- TODO add favicon -->
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+
+  <body>
+    <div class="transition-fade">
+      <div class="w-screen h-screen p-10 fixed z-50 top-0 let-0 flex items-center justify-center bg-black min-width:hidden">
+        <p class="text-center text-lg text-white/90">
+            The website is not fully responsive yet. Please use a larger screen (>1200px).
+            <br/>
+            Support for smaller screens will be added in near time.
+        </p>
+      </div>
+      <Appbar />
+      <Headers headings={depth2Headings} />
+      <Drawer />
+      <main class="ml-80 mr-80 mt-24">
+        <slot />
+      </main>
+    </div>
+  </body>
+
+  <style is:global>
+    @import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;600;700;800;900&display=swap");
+
+    :root {
+      --primary: 85, 0, 255;
+      --surface: 10, 10, 10;
+      --background: 5, 5, 5;
+    }
+    html {
+      background: linear-gradient(
+        170deg,
+        rgba(21, 1, 236, 0.2) 30%,
+        rgb(5, 5, 5) 70%
+      );
+      background-repeat: no-repeat;
+      scroll-behavior: smooth;
+      @apply h-full font-body text-white bg-black;
+    }
+  </style>
+</html>

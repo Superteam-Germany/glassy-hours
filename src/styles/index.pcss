@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* Global focus outline reset */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply mb-4 font-bold leading-4 font-heading;
+}
+
+h1,
+h2 {
+  max-width: 40ch;
+}
+
+:is(h2, h3):not(:first-child) {
+  margin-top: 3rem;
+}
+
+:is(h4, h5, h6):not(:first-child) {
+  margin-top: 2rem;
+}
+
+h1 {
+  @apply text-5xl uppercase;
+}
+
+h2 {
+  @apply text-4xl;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.3rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.5em;
+}
+
+ul {
+  font-size: 1.05rem;
+  line-height: 1.55em;
+}
+
+p,
+ul {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+small,
+.text_small {
+  font-size: 0.833rem;
+}
+
+a {
+  font-weight: 400;
+  text-underline-offset: 0.08em;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+  color: rgba(var(--primary), 0.9);
+}
+
+a:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 0.25em;
+}
+
+strong {
+  font-weight: 600;
+  color: inherit;
+}
+
+code {
+  font-family: monospace;
+  @apply text-lg;
+}
+
+pre {
+  position: relative;
+  --padding-block: 1rem;
+  --padding-inline: 2rem;
+  padding: var(--padding-block) var(--padding-inline);
+  padding-right: calc(var(--padding-inline) * 2);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: calc(var(--padding-inline) * -1);
+  margin-right: calc(var(--padding-inline) * -1);
+  font-family: var(--font-mono);
+  line-height: 1.5;
+  font-size: 0.85em;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+pre {
+  background-color: var(--theme-code-bg);
+  color: var(--theme-code-text);
+}
+
+@media (min-width: 37.75em) {
+  pre {
+    --padding-inline: 1.25rem;
+    border-radius: 8px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+ul {
+  list-style: inside;
+  margin-left: 1rem;
+}

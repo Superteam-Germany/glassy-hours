@@ -1,0 +1,34 @@
+---
+export interface Props {
+  headings: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+}
+const { headings } = Astro.props;
+---
+
+<div class="headers-section">
+  <p class="-ml-4 pb-2 text-white font-heading">Page Content</p>
+  <div class="headers-leading"></div>
+  {
+    headings.map((heading) => {
+      return (
+        <a href={`#${heading.slug}`} class="my-1 hover:text-primary">
+          {heading.text}
+        </a>
+      );
+    })
+  }
+</div>
+
+<style>
+  .headers-section {
+    @apply w-52 fixed right-10 flex flex-col text-sm text-white/80 font-body;
+  }
+  .headers-leading {
+    height: calc(100% - 32px);
+    @apply w-1 absolute -left-4 bottom-0 rounded-full bg-primary/80;
+  }
+</style>
