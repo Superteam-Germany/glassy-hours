@@ -11,12 +11,13 @@
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen
     />
+  {:else}
+    <div class="video-player--empty">
+      <p class="text-center text-lg font-light text-white/70">
+        Recording of the talk will be available after the event.
+      </p>
+    </div>
   {/if}
-  <div class="video-player--empty">
-    <p class="text-center text-lg font-light text-white/70">
-      Recording of the talk will be available after the event.
-    </p>
-  </div>
 </div>
 
 <style lang="postcss">
